@@ -3,6 +3,13 @@
     "name": "Apps4LAB Redesign",
     "version": "1.0",
     "description": "A total redesign of portaal.apps4lab.be with themes, projected scores, and more.",
+    "permissions": [
+        "storage"
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
     "content_scripts": [
         {
             "matches": [

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apps4LAB Custom CSS</title>
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+      margin: 24px;
+      max-width: 900px;
+      color: #1c1f26;
+    }
+
+    h1 {
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 320px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 14px;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #4f86f7;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      min-height: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Apps4LAB Custom CSS</h1>
+  <p>Paste your custom CSS below. The styles will load on every page under <strong>https://portaal.apps4lab.be</strong>.</p>
+
+  <label for="customCss">Custom CSS</label>
+  <textarea id="customCss" placeholder="Enter your custom CSS here..."></textarea>
+  <button id="saveButton">Save CSS</button>
+  <div class="status" id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>

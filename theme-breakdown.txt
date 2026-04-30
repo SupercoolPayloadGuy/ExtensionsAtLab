@@ -1,0 +1,181 @@
+Full Theme Breakdown for ExtensionsAtLab
+
+1) What this extension does
+- Injects styles.css and content.js into pages matching https://portaal.apps4lab.be/*
+- Uses Chrome extension manifest v3
+- content.js is currently empty, so all theming comes from styles.css
+
+2) Theme architecture
+The theme is built around CSS custom properties in :root, then component-specific overrides for the portal UI.
+
+styles.css structure:
+- @import Google font Inter
+- :root theme variables
+- Base styles for body and all elements
+- Navbar styling
+- Centered page container
+- Tabs styling
+- Grade table styling
+- Grade badges
+- Dropdown styling
+- Custom scrollbar styling
+
+3) Core theme variables
+These are the values an AI should use as the main theme palette:
+- --bg: page background
+- --surface: cards / panels
+- --primary: accent color
+- --primary-dark: stronger accent
+- --text: main text color
+- --text-muted: secondary text
+- --border: borders / dividers
+- --shadow: card shadow
+- --radius: border radius
+- --nav-bg: top bar / header background
+- --nav-text: top bar text color
+
+Grade-specific labels:
+- --grade-aplus: A+ badge
+- --grade-a: A badge
+- --grade-b: B badge
+- --grade-c: C badge
+- --grade-ni: lower grade badge
+
+Default values:
+- --bg: #f5f7fa
+- --surface: #ffffff
+- --primary: #4f86f7
+- --primary-dark: #3a6fd8
+- --text: #1a1a2e
+- --text-muted: #6b7280
+- --border: #e5e7eb
+- --shadow: 0 2px 12px rgba(0, 0, 0, 0.08)
+- --radius: 12px
+- --nav-bg: #ffffff
+- --nav-text: #1a1a2e
+- --grade-aplus: #22c55e
+- --grade-a: #86efac
+- --grade-b: #fbbf24
+- --grade-c: #f97316
+- --grade-ni: #f87171
+
+4) Component/style breakdown
+Base
+- Applies Inter font to everything
+- body background uses --bg
+- Text color uses --text
+
+Navbar
+Selectors:
+- header
+- .MuiAppBar-root
+
+Properties:
+- background: var(--nav-bg)
+- color: var(--nav-text)
+- box-shadow: var(--shadow)
+
+Centered layout
+Selector:
+- .MuiBox-root.css-19midj6
+
+Properties:
+- max-width: 1200px
+- centered margin
+- padding: 24px
+
+Tabs
+Selectors:
+- .MuiTab-root
+- .MuiTab-root.Mui-selected
+- .MuiTabs-indicator
+
+Properties:
+- font family Inter
+- no uppercase transform
+- selected tab uses --primary
+- indicator uses --primary
+
+Grade Table
+Selectors:
+- .MuiTable-root
+- .MuiTableRow-root:hover
+- .MuiTableCell-root
+- .MuiTableCell-head
+
+Properties:
+- rounded cards
+- shadow box
+- hover background #f0f4ff
+- cell padding and border color
+- header text uppercase and muted
+
+Grade Badges
+Selectors are class-based and map to grade categories:
+- .css-1ykuhmv → A+
+- .css-3wm4lv → A
+- .css-tk3ca7 → B
+- .css-m66blx → C / N/A
+
+Common styling:
+- rounded pill shape
+- padding 2px 10px
+- bold text
+
+Dropdown
+Selectors:
+- .MuiSelect-select
+- .MuiOutlinedInput-root
+
+Properties:
+- rounding 8px
+- Inter font
+- font size 14px
+
+Scrollbar
+- narrow track width
+- track uses --bg
+- thumb uses --border
+
+5) How to tell an AI to create a custom theme
+Use the following as a paste-in prompt:
+- Define a new palette for:
+  - page background
+  - surface/cards
+  - primary accent
+  - primary dark
+  - main text
+  - muted text
+  - border
+  - shadow
+  - radius
+  - nav background
+  - nav text
+- Keep Inter font for body and UI
+- Keep the same layout rules:
+  - center content with max width 1200px
+  - padded page container
+- Keep tab styling but swap selected color to the new primary
+- Keep table card shadow and hover style, but use the new palette
+- Create consistent grade badge colors for A+, A, B, C/low grade
+- Provide custom scrollbar colors that match the theme
+
+Example AI instruction:
+Create a custom CSS theme for the Apps4LAB portal by replacing the :root variables with a cohesive palette. Preserve the layout and component structure from the existing styles.css. Use a modern card-based look with rounded surfaces, clean typography, soft shadows, and bright accent color. Generate CSS variables and component overrides for navbar, tabs, tables, badges, dropdowns, and scrollbar.
+
+6) Recommended paste-ready prompt
+I need a custom theme for the Apps4LAB Chrome extension styles.css. The extension injects CSS into https://portaal.apps4lab.be and uses these main design areas:
+- global theme variables in :root
+- body background and text
+- header / .MuiAppBar-root
+- centered container .MuiBox-root.css-19midj6
+- tab styling .MuiTab-root and .MuiTabs-indicator
+- grade table styling .MuiTable-root and .MuiTableCell-root
+- grade badges for A+, A, B, C with pill styles
+- dropdown styling .MuiSelect-select and .MuiOutlinedInput-root
+- custom scrollbar styling
+
+Please output a complete CSS theme with:
+- --bg, --surface, --primary, --primary-dark, --text, --text-muted, --border, --shadow, --radius, --nav-bg, --nav-text, --grade-aplus, --grade-a, --grade-b, --grade-c, --grade-ni
+- matching component overrides
+- the same structure as the existing file

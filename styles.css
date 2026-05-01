@@ -1,7 +1,6 @@
 /* ============================================
    APPS4LAB REDESIGN - styles.css
    ============================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* === CSS VARIABLES (themes swap these) === */
@@ -29,7 +28,6 @@
     font-family: 'Inter', sans-serif !important;
     box-sizing: border-box;
 }
-
 body {
     background: var(--bg) !important;
     color: var(--text) !important;
@@ -58,12 +56,10 @@ header,
     font-size: 14px !important;
     letter-spacing: 0 !important;
 }
-
 .MuiTab-root.Mui-selected {
     color: var(--primary) !important;
     font-weight: 600 !important;
 }
-
 .MuiTabs-indicator {
     background-color: var(--primary) !important;
 }
@@ -74,20 +70,17 @@ header,
     overflow: hidden !important;
     box-shadow: var(--shadow) !important;
 }
-
 .MuiTableRow-root:hover {
     background: #f0f4ff !important;
     cursor: pointer !important;
     transition: background 0.15s ease !important;
 }
-
 .MuiTableCell-root {
     font-family: 'Inter', sans-serif !important;
     font-size: 13px !important;
     border-color: var(--border) !important;
     padding: 12px 16px !important;
 }
-
 .MuiTableCell-head {
     background: var(--bg) !important;
     font-weight: 600 !important;
@@ -106,7 +99,6 @@ header,
     padding: 2px 10px !important;
     font-weight: 600 !important;
 }
-
 .css-3wm4lv {
     /* A */
     background: var(--grade-a) !important;
@@ -115,7 +107,6 @@ header,
     padding: 2px 10px !important;
     font-weight: 600 !important;
 }
-
 .css-tk3ca7 {
     /* B */
     background: var(--grade-b) !important;
@@ -124,7 +115,6 @@ header,
     padding: 2px 10px !important;
     font-weight: 600 !important;
 }
-
 .css-m66blx {
     /* C */
     background: var(--grade-ni) !important;
@@ -134,13 +124,33 @@ header,
     font-weight: 600 !important;
 }
 
+/* === SVG GRADE BARS === */
+/* These override the fill attributes on the SVG rect elements.
+   Tied to the same CSS variables above — change a variable and
+   both the badges and the bars update together. */
+
+rect[fill="#81c784"] {
+    fill: var(--grade-aplus) !important;
+}
+rect[fill="#a9e8a4ff"] {
+    fill: var(--grade-a) !important;
+}
+rect[fill="#ffeb3b"] {
+    fill: var(--grade-b) !important;
+}
+rect[fill="#ffb74d"] {
+    fill: var(--grade-c) !important;
+}
+rect[fill="#e57373"] {
+    fill: var(--grade-ni) !important;
+}
+
 /* === DROPDOWN === */
 .MuiSelect-select {
     font-family: 'Inter', sans-serif !important;
     border-radius: 8px !important;
     font-size: 14px !important;
 }
-
 .MuiOutlinedInput-root {
     border-radius: 8px !important;
 }
@@ -149,11 +159,9 @@ header,
 ::-webkit-scrollbar {
     width: 6px;
 }
-
 ::-webkit-scrollbar-track {
     background: var(--bg);
 }
-
 ::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 99px;

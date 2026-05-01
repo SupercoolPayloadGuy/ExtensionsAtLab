@@ -27,6 +27,21 @@
       margin-bottom: 8px;
     }
 
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .checkbox-row input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
     textarea {
       width: 100%;
       min-height: 320px;
@@ -60,6 +75,11 @@
 <body>
   <h1>Apps4LAB Custom CSS</h1>
   <p>Paste your custom CSS below. The styles will load on every page under <strong>https://portaal.apps4lab.be</strong>.</p>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="enabledCheckbox" />
+    <label for="enabledCheckbox" style="display:inline; font-weight:400; margin:0;">Enabled</label>
+  </div>
 
   <label for="customCss">Custom CSS</label>
   <textarea id="customCss" placeholder="Enter your custom CSS here..."></textarea>

@@ -3,7 +3,8 @@ Full Theme Breakdown for ExtensionsAtLab
 1) What this extension does
 - Injects styles.css and content.js into pages matching https://portaal.apps4lab.be/*
 - Uses Chrome extension manifest v3
-- content.js is currently empty, so all theming comes from styles.css
+- content.js injects a floating custom CSS editor panel into the portal page
+- styles.css provides the default redesign theme
 
 2) Theme architecture
 The theme is built around CSS custom properties in :root, then component-specific overrides for the portal UI.
@@ -16,7 +17,8 @@ styles.css structure:
 - Centered page container
 - Tabs styling
 - Grade table styling
-- Grade badges
+- Grade badges (class-based)
+- SVG grade bar overrides (attribute-based)
 - Dropdown styling
 - Custom scrollbar styling
 
@@ -35,11 +37,11 @@ These are the values an AI should use as the main theme palette:
 - --nav-text: top bar text color
 
 Grade-specific labels:
-- --grade-aplus: A+ badge
-- --grade-a: A badge
-- --grade-b: B badge
-- --grade-c: C badge
-- --grade-ni: lower grade badge
+- --grade-aplus: A+ badge and high score SVG bar
+- --grade-a: A badge and good score SVG bar
+- --grade-b: B badge and sufficient SVG bar
+- --grade-c: C badge and below average SVG bar
+- --grade-ni: lower grade badge and fail SVG bar
 
 Default values:
 - --bg: #f5f7fa
@@ -121,6 +123,22 @@ Common styling:
 - rounded pill shape
 - padding 2px 10px
 - bold text
+- colors sourced from grade CSS variables
+
+SVG Grade Bars
+The portal renders grade score bars as SVG <rect> elements with a fill attribute.
+These are overridden using attribute selectors tied to the same CSS variables as badges,
+so changing a grade variable updates both the badge and the bar automatically.
+
+Selectors and their variable mapping:
+- rect[fill="#81c784"]   → var(--grade-aplus)   high score
+- rect[fill="#a9e8a4ff"] → var(--grade-a)        good score
+- rect[fill="#ffeb3b"]   → var(--grade-b)         sufficient
+- rect[fill="#ffb74d"]   → var(--grade-c)         below average
+- rect[fill="#e57373"]   → var(--grade-ni)         fail
+
+Note: SVG fill attributes have lower specificity than CSS, so !important is used
+to ensure the override always applies.
 
 Dropdown
 Selectors:
@@ -137,7 +155,15 @@ Scrollbar
 - track uses --bg
 - thumb uses --border
 
-5) How to tell an AI to create a custom theme
+5) Storage key reference
+content.js and options.js both use these chrome.storage.sync keys:
+- apps4labCustomCss     → the user's custom CSS string
+- apps4labCustomCssEnabled → boolean, whether custom CSS is active
+
+Both the in-page panel (content.js) and the options page (options.js) read and write
+the same keys, so changes in either place are reflected everywhere.
+
+6) How to tell an AI to create a custom theme
 Use the following as a paste-in prompt:
 - Define a new palette for:
   - page background
@@ -158,12 +184,13 @@ Use the following as a paste-in prompt:
 - Keep tab styling but swap selected color to the new primary
 - Keep table card shadow and hover style, but use the new palette
 - Create consistent grade badge colors for A+, A, B, C/low grade
+- The same grade colors apply to SVG bars automatically via CSS variables
 - Provide custom scrollbar colors that match the theme
 
 Example AI instruction:
-Create a custom CSS theme for the Apps4LAB portal by replacing the :root variables with a cohesive palette. Preserve the layout and component structure from the existing styles.css. Use a modern card-based look with rounded surfaces, clean typography, soft shadows, and bright accent color. Generate CSS variables and component overrides for navbar, tabs, tables, badges, dropdowns, and scrollbar.
+Create a custom CSS theme for the Apps4LAB portal by replacing the :root variables with a cohesive palette. Preserve the layout and component structure from the existing styles.css. Use a modern card-based look with rounded surfaces, clean typography, soft shadows, and bright accent color. Generate CSS variables and component overrides for navbar, tabs, tables, badges, SVG grade bars, dropdowns, and scrollbar.
 
-6) Recommended paste-ready prompt
+7) Recommended paste-ready prompt
 I need a custom theme for the Apps4LAB Chrome extension styles.css. The extension injects CSS into https://portaal.apps4lab.be and uses these main design areas:
 - global theme variables in :root
 - body background and text
@@ -171,7 +198,8 @@ I need a custom theme for the Apps4LAB Chrome extension styles.css. The extensio
 - centered container .MuiBox-root.css-19midj6
 - tab styling .MuiTab-root and .MuiTabs-indicator
 - grade table styling .MuiTable-root and .MuiTableCell-root
-- grade badges for A+, A, B, C with pill styles
+- grade badges for A+, A, B, C with pill styles (.css-1ykuhmv, .css-3wm4lv, .css-tk3ca7, .css-m66blx)
+- SVG grade bars: rect[fill="#81c784"], rect[fill="#a9e8a4ff"], rect[fill="#ffeb3b"], rect[fill="#ffb74d"], rect[fill="#e57373"]
 - dropdown styling .MuiSelect-select and .MuiOutlinedInput-root
 - custom scrollbar styling
 

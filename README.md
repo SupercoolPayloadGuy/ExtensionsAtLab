@@ -13,6 +13,7 @@ A Chrome extension that customizes the Apps4LAB evaluator portal at https://port
 - Adds a floating custom CSS editor directly in the portal page.
 - Save and enable/disable your own CSS without editing extension files.
 - Uses browser storage so your custom styles persist across reloads.
+- Grade badge colors and SVG grade bar colors are both controlled by a single set of CSS variables.
 - Provides a theme breakdown guide file for building new custom themes.
 
 ## How to use custom CSS
@@ -23,22 +24,27 @@ A Chrome extension that customizes the Apps4LAB evaluator portal at https://port
 5. Click `Save` to persist changes.
 6. Click `Clear` to remove stored CSS.
 
+You can also manage your custom CSS from the extension's options page (`chrome://extensions` → Apps4LAB Redesign → Details → Extension options).
+
 ## What `theme-breakdown.txt` is for
 The `theme-breakdown.txt` file contains a full summary of the extension's styling structure:
 - the CSS variables used in `styles.css`
 - the component selectors styled by the extension
+- the SVG grade bar attribute selectors and their variable mappings
+- the storage key reference for content.js and options.js
 - the layout and visual design intent
 - an AI-friendly prompt for generating new custom themes
 
 Use it as a reference or as input to an AI theme generator when you want to create a new visual palette.
 
 ## Newest update
-- Added an in-page custom CSS editor overlay with save and clear buttons.
-- Added an `Enabled` checkbox to toggle custom CSS without removing saved content.
-- Added extension options support and persistent storage for custom theme data.
-- Added `theme-breakdown.txt` to document theme structure and guide future theme creation.
+- Fixed storage key mismatch between `options.js` and `content.js` — CSS saved via the options page now correctly loads on the portal.
+- Added `Enabled` checkbox to the options page to match the in-page panel behaviour.
+- Added SVG grade bar overrides (`rect[fill="..."]`) to `styles.css`, tied to the same CSS variables as the grade badges so both update together.
+- Updated `theme-breakdown.txt` with SVG grade bar documentation and storage key reference.
 
 ## Notes
 - `content.js` injects the custom editor UI and loads saved CSS on matching portal pages.
 - `styles.css` contains the default redesign styles for the portal.
+- `options.js` and `content.js` share the same storage keys (`apps4labCustomCss`, `apps4labCustomCssEnabled`).
 - If the editor does not appear, reload the portal page after installing or updating the extension.
